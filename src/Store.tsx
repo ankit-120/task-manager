@@ -11,7 +11,8 @@ type todo = {
 
 class TaskStore {
 
-    task: todo[] = JSON.parse(localStorage.getItem('task') || '[]') as todo[];
+
+    // task: todo[] = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('task') || '[]') as todo[] : [];
 
     constructor() {
         makeObservable(this, {
@@ -23,6 +24,8 @@ class TaskStore {
             deleteAll: action
         })
     }
+
+    task: todo[] = JSON.parse(localStorage.getItem('task') || '[]') as todo[];
 
     add = (title: string, description: string) => {
         const newTodo = {
