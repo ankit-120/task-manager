@@ -11,12 +11,10 @@ type todo = {
 
 class TaskStore {
 
-
-    // task: todo[] = typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('task') || '[]') as todo[] : [];
-
     constructor() {
         makeObservable(this, {
             task: observable,
+            loadFromLocalStorage: action,
             add: action,
             remove: action,
             changeStatus: action,
@@ -25,7 +23,12 @@ class TaskStore {
         })
     }
 
-    task: todo[] = JSON.parse(localStorage.getItem('task') || '[]') as todo[];
+    task: todo[] = [];
+    // task: todo[] = JSON.parse(localStorage.getItem('task') || '[]');
+
+    loadFromLocalStorage = () => {
+        this.task = JSON.parse(localStorage.getItem('task') || '[]');
+    }
 
     add = (title: string, description: string) => {
         const newTodo = {

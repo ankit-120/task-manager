@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { observer } from 'mobx-react'
 import taskStore from '@/Store'
 import Link from 'next/link'
@@ -8,9 +8,13 @@ import { BiSolidEditAlt } from 'react-icons/bi'
 import { AiFillDelete } from 'react-icons/ai'
 
 const TodoList = observer(() => {
-    const { task, remove, changeStatus, deleteAll } = taskStore;
+    const { task, remove, changeStatus, deleteAll, loadFromLocalStorage } = taskStore;
 
     const [taskStatus, setTaskStatus] = useState("all");
+
+    useEffect(() => {
+        loadFromLocalStorage();
+    }, []);
 
     const filterTask = () => {
         if (taskStatus !== 'all') {
