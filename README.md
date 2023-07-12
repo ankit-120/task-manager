@@ -22,6 +22,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 
 **Instructions on how to run the application locally**
+
 1-Clone the repositorie on your system.
 
 2-Open the folder in any code editor(eg: VsCode)
