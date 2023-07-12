@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { observer } from 'mobx-react'
+import { observer } from 'mobx-react-lite'
 import taskStore from '@/Store'
 import { useRouter } from 'next/navigation'
 

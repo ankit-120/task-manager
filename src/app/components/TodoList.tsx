@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { observer } from 'mobx-react'
+import { observer } from 'mobx-react-lite'
 import taskStore from '@/Store'
 import Link from 'next/link'
 import { BiSolidEditAlt } from 'react-icons/bi'
@@ -9,12 +9,13 @@ import { AiFillDelete } from 'react-icons/ai'
 
 const TodoList = observer(() => {
     const { task, remove, changeStatus, deleteAll } = taskStore;
+    console.log(task)
 
     const [taskStatus, setTaskStatus] = useState("all");
 
     const filterTask = () => {
         if (taskStatus !== 'all') {
-            return task.filter((task) => task.status === taskStatus)
+            return task.filter((task: any) => task.status === taskStatus)
         }
         return task;
     }
@@ -88,7 +89,7 @@ const TodoList = observer(() => {
                                     </thead>
                                     <tbody>
                                         {
-                                            filterTask().map((task) => (
+                                            filterTask().map((task: any) => (
                                                 <tr
                                                     className='border-b-2 border-slate-300 h-[100px]'
                                                     key={task.id}>
