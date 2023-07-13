@@ -34,7 +34,7 @@ const TodoList = observer(() => {
 
     return (
         <>
-            //when no task is present
+            {/* //when no task is present */}
             {
                 task.length === 0 ? (
                     <div className='flex justify-center h-[90vh] items-center'>
