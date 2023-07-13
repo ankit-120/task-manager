@@ -5,8 +5,11 @@ import { observer } from 'mobx-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
+// Page to view the Task 
+
 const ViewTodo = observer(({ searchParams }: any) => {
 
+    // getting task from url 
     const { title, description, status } = searchParams;
 
     const router = useRouter();

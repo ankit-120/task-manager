@@ -10,12 +10,16 @@ import { AiFillDelete } from 'react-icons/ai'
 const TodoList = observer(() => {
     const { task, remove, changeStatus, deleteAll, loadFromLocalStorage } = taskStore;
 
+    //filters task according to status
     const [taskStatus, setTaskStatus] = useState("all");
 
+    // to load data from local storage
     useEffect(() => {
         loadFromLocalStorage();
     }, []);
 
+
+    //filter fn to filter task
     const filterTask = () => {
         if (taskStatus !== 'all') {
             return task.filter((task) => task.status === taskStatus)
@@ -23,12 +27,14 @@ const TodoList = observer(() => {
         return task;
     }
 
+    //deletes all task from local storage
     const handleAllDelete = () => {
         deleteAll();
     }
 
     return (
         <>
+            //when no task is present
             {
                 task.length === 0 ? (
                     <div className='flex justify-center h-[90vh] items-center'>
@@ -41,11 +47,14 @@ const TodoList = observer(() => {
                         </div>
                     </div>
                 )
-                    : (
+                    :
+                    // when task is added
+                    (
                         <div className='w-[100vw] flex justify-center'>
                             <div className='w-[100vw] md:w-[70vw]'>
                                 <div className='flex w-full justify-around'>
 
+                                    {/* //All filter */}
                                     <div className='cursor-pointer w-[25%] text-center text-xl font-bold border-b-2 border-white hover:border-slate-800 my-2'
                                         onClick={() => setTaskStatus('all')}
                                         style={{
@@ -54,6 +63,7 @@ const TodoList = observer(() => {
                                         All
                                     </div>
 
+                                    {/* //pending filter */}
                                     <div className='cursor-pointer w-[25%] text-center text-xl font-bold border-b-2 border-white hover:border-slate-800 my-2'
                                         onClick={() => setTaskStatus('pending')}
                                         style={{
@@ -62,6 +72,7 @@ const TodoList = observer(() => {
                                         Pending
                                     </div>
 
+                                    {/* //Active filter */}
                                     <div className='cursor-pointer w-[25%] text-center text-xl font-bold border-b-2 border-white hover:border-slate-800 my-2'
                                         onClick={() => setTaskStatus('active')}
                                         style={{
@@ -70,6 +81,7 @@ const TodoList = observer(() => {
                                         Active
                                     </div>
 
+                                    {/* Finished filter */}
                                     <div className='cursor-pointer w-[25%] text-center text-xl font-bold border-b-2 border-white hover:border-slate-800 my-2'
                                         onClick={() => setTaskStatus('completed')}
                                         style={{
@@ -80,6 +92,7 @@ const TodoList = observer(() => {
 
                                 </div>
 
+                                {/* table for todo */}
                                 <table className='w-full'>
                                     <thead
                                         className='bg-slate-800 text-white text-xl h-[100px]'>
@@ -90,12 +103,14 @@ const TodoList = observer(() => {
                                             <th className='w-[30%] md:w-[20%]'>Action</th>
                                         </tr>
                                     </thead>
+                                    {/* table body */}
                                     <tbody>
                                         {
                                             filterTask().map((task) => (
                                                 <tr
                                                     className='border-b-2 border-slate-300 h-[100px]'
                                                     key={task.id}>
+                                                    {/* 1st column */}
                                                     <td
                                                         className='md:text-xl'
                                                         align='center'>
@@ -106,6 +121,7 @@ const TodoList = observer(() => {
                                                             {task.title}
                                                         </Link>
                                                     </td>
+                                                    {/* 2nd column */}
                                                     <td
                                                         className='hidden md:table-cell cursor-pointer md:text-xl'>
                                                         <Link href={{
@@ -115,6 +131,7 @@ const TodoList = observer(() => {
                                                             {task.description}
                                                         </Link>
                                                     </td>
+                                                    {/* 3rd column */}
                                                     <td
                                                         className='md:text-xl'
                                                         align='center'>
@@ -124,8 +141,8 @@ const TodoList = observer(() => {
                                                             <option value="active">Active</option>
                                                             <option value="completed">Completed</option>
                                                         </select>
-
                                                     </td>
+                                                    {/* 4th column */}
                                                     <td
                                                         align='center'
                                                         className='flex flex-col justify-center items-center h-[100px] md:flex-row md:items-center'>
@@ -148,11 +165,14 @@ const TodoList = observer(() => {
                                     </tbody>
                                 </table>
 
+                                {/* New Task button */}
                                 <div className='text-center mt-10'>
                                     <Link
                                         className='py-3 px-4 rounded-md bg-slate-800 text-white border-2 hover:bg-white hover:border-slate-800 hover:text-slate-800'
                                         href={'/addTodo'}>Add New Task</Link>
                                 </div>
+
+                                {/* Delete all task  */}
                                 <div className='text-center mt-10'>
                                     <button
                                         className='py-3 px-4 rounded-md bg-slate-800 text-white border-2 hover:bg-white hover:border-slate-800 hover:text-slate-800'
